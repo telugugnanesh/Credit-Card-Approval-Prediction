@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Prediction Result - Loan Approval Prediction System{% endblock %}
+{% block page_title %}📊 Credit Card Application Prediction Result{% endblock %}
+{% block page_subtitle %}Review the machine learning model's automated decision for the submitted applicant details.{% endblock %}
+{% block content %}
+<div style="display: flex; flex-direction: column; gap: 2rem;">
+    <!-- Prediction Decision Card -->
+    {% if prediction.decision == 'Approved' %}
+        <div class="prediction-card prediction-approved" style="padding: 2rem; border-radius: 0.75rem; border-left: 8px solid #10b981; background: #f0fdf4; color: #14532d;">
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem;">
+                <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> {{ prediction_text }}
+            </h2>
+            <p style="font-size: 1.1rem; margin: 0 0 0.5rem 0;">
+                Approval Confidence: <strong>{{ "%.1f"|format(prediction.prob_approved * 100) }}%</strong>
+            </p>
+            <p style="font-size: 1.1rem; margin: 0 0 1rem 0;">
+                Risk Level Category: <strong>{{ prediction.risk_cat }}</strong> (Default probability: {{ "%.1f"|format(prediction.prob_default * 100) }}%)
+            </p>
+            <p style="font-size: 0.95rem; opacity: 0.9; margin: 0;">
+                Applicant ID <strong>#{% if prediction.new_id %}{{ prediction.new_id }}{% else %}N/A{% endif %}</strong> ({{ prediction.applicant_name }}) has been logged in the Applicant Directory.
+            </p>
+        </div>
+    {% else %}
+        <div class="prediction-card prediction-denied" style="padding: 2rem; border-radius: 0.75rem; border-left: 8px solid #ef4444; background: #fef2f2; color: #7f1d1d;">
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem;">
+                <i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i> {{ prediction_text }}
+            </h2>
+            <p style="font-size: 1.1rem; margin: 0 0 0.5rem 0;">
+                Rejection Confidence: <strong>{{ "%.1f"|format(prediction.prob_default * 100) }}%</strong>
+            </p>
+            <p style="font-size: 1.1rem; margin: 0 0 1rem 0;">
+                Risk Level Category: <strong>{{ prediction.risk_cat }}</strong> (Default probability: {{ "%.1f"|format(prediction.prob_default * 100) }}%)
+            </p>
+            <p style="font-size: 0.95rem; opacity: 0.9; margin: 0;">
+                Applicant ID <strong>#{% if prediction.new_id %}{{ prediction.new_id }}{% else %}N/A{% endif %}</strong> ({{ prediction.applicant_name }}) has been logged in the Applicant Directory.
+            </p>
+        </div>
+    {% endif %}
+    <!-- Action Buttons -->
+    <div style="display: flex; gap: 1.5rem; justify-content: flex-start; margin-top: 1rem;">
+        <a href="{{ url_for('index_page') }}" class="btn btn-primary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Run Another Prediction
+        </a>
+        <a href="{{ url_for('applicants') }}" class="btn" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border: 1px solid #cbd5e1; background: white; color: #334155;">
+            <i class="fa-solid fa-users-rectangle"></i> Open Applicant Directory
+        </a>
+    </div>
+</div>
+{% endblock %}
