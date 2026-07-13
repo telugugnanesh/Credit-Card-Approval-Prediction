@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Loan Approval Prediction System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Loan Predictor</span>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="sidebar-user-name">{{ session.get('user_name', 'Loan Officer') }}</div>
+            <div class="sidebar-user-role"><i class="fa-solid fa-user-shield"></i> {{ session.get('user_role', 'User') }}</div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item {% if active_page == 'home' %}active{% endif %}">
+                <a href="{{ url_for('home') }}">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {% if active_page == 'dashboard' %}active{% endif %}">
+                <a href="{{ url_for('dashboard') }}">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {% if active_page == 'applicants' %}active{% endif %}">
+                <a href="{{ url_for('applicants') }}">
+                    <i class="fa-solid fa-users-rectangle"></i>
+                    <span>Applicant Directory</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {% if active_page == 'predict' %}active{% endif %}">
+                <a href="{{ url_for('index_page') }}">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <span>New Decision Tool</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item {% if active_page == 'logs' %}active{% endif %}">
+                <a href="{{ url_for('logs') }}">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>System Logs</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-logout">
+            <a href="{{ url_for('logout') }}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Sign Out</span>
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        <header class="page-header">
+            <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+            <p class="page-subtitle">{% block page_subtitle %}{% endblock %}</p>
+        </header>
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

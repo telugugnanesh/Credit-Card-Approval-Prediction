@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: credit-card-approval
+    env: python
+    plan: free
+    buildCommand: pip install -r Flask/requirements.txt && python Flask/run_pipeline.py
+    startCommand: python Flask/app.py
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+    healthCheckPath: /login

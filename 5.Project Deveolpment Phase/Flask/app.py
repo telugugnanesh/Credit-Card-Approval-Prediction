@@ -1,4 +1,3 @@
-# pyrefly: ignore [missing-import]
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import pandas as pd
 import sqlite3

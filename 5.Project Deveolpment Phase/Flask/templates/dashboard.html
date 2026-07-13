@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - Loan Approval Prediction System{% endblock %}
+{% block page_title %}🏦 Performance Dashboard{% endblock %}
+{% block page_subtitle %}Real-time loan portfolio metrics and risk distributions.{% endblock %}
+{% block content %}
+<!-- KPI Metrics Grid -->
+<div class="dashboard-grid">
+    <div class="kpi-card">
+        <div class="kpi-value">{{ total_apps }}</div>
+        <div class="kpi-label">Total Applications</div>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-value">{{ "%.1f"|format(approval_rate) }}%</div>
+        <div class="kpi-label">Approval Rate</div>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-value">{{ "%.1f"|format(high_risk_pct) }}%</div>
+        <div class="kpi-label">High Risk Rate</div>
+    </div>
+    
+    <div class="kpi-card">
+        <div class="kpi-value">{{ "%.1f"|format(latest_accuracy * 100) }}%</div>
+        <div class="kpi-label">Model Accuracy</div>
+    </div>
+</div>
+<!-- Plotly Interactive Charts -->
+<div class="charts-grid" style="margin-bottom: 2rem;">
+    <div class="chart-card">
+        <div class="chart-title"><i class="fa-solid fa-triangle-exclamation" style="color: var(--warning-color);"></i> Approval Decisions by Risk Category</div>
+        <div class="chart-container">
+            {{ chart_risk_html | safe }}
+        </div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-title"><i class="fa-solid fa-graduation-cap" style="color: var(--primary-color);"></i> Approval Rate by Education Level</div>
+        <div class="chart-container">
+            {{ chart_edu_html | safe }}
+        </div>
+    </div>
+</div>
+<div class="charts-grid">
+    <div class="chart-card">
+        <div class="chart-title"><i class="fa-solid fa-briefcase" style="color: var(--success-color);"></i> Employment Length vs Decision</div>
+        <div class="chart-container">
+            {{ chart_emp_html | safe }}
+        </div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-title"><i class="fa-solid fa-chart-pie" style="color: var(--primary-color);"></i> Income Type Representation</div>
+        <div class="chart-container">
+            {{ chart_inc_html | safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

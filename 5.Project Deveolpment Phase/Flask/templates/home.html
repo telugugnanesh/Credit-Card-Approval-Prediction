@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Home - Loan Approval Prediction System{% endblock %}
+{% block page_title %}🏠 Welcome to the Loan Approval Prediction System{% endblock %}
+{% block page_subtitle %}An advanced, real-time credit card application screening and risk assessment tool powered by machine learning.{% endblock %}
+{% block content %}
+<div class="form-card" style="padding: 2.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+    <div style="font-size: 4rem; color: #3b82f6; margin-bottom: 1rem;">
+        <i class="fa-solid fa-credit-card"></i>
+    </div>
+    
+    <h2 style="font-size: 1.75rem; font-weight: 700; color: #1e293b;">Predict Credit Card Approvals in Real-Time</h2>
+    
+    <p style="font-size: 1.1rem; color: #64748b; max-width: 600px; line-height: 1.6;">
+        This application utilizes trained machine learning classifiers (Decision Tree, Random Forest, and Logistic Regression) to analyze applicant demographic attributes, financial status, and credit histories to predict approval outcomes instantly.
+    </p>
+    <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+        <a href="{{ url_for('index_page') }}" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1.05rem; border-radius: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fa-solid fa-bolt-lightning"></i> Access Prediction Form
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn" style="padding: 0.85rem 2rem; font-size: 1.05rem; border-radius: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border: 1px solid #cbd5e1; background: white; color: #334155;">
+            <i class="fa-solid fa-chart-line"></i> View Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
