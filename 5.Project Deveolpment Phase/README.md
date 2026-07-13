@@ -226,4 +226,3 @@ python Flask/app.py
 
 - **Project:** Credit Card Approval Prediction System
 - **Tech Stack:** Flask + Scikit-Learn + SQLite + Plotly
-- **Reference Architecture:** Smart Lender (AI Loan Approval System)
